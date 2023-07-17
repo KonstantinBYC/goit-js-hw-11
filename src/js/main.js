@@ -5,7 +5,7 @@ import { onLoad, optionsScroll } from './intersection.js';
 import { globalVars } from './globalVars.js';
 import { showLoadingMessage, hideLoadingMessage } from './loader.js';
 import { notifySuccessOrFail } from './notifications.js';
-import { countTotalPage } from './countTotalTage.js';
+import { countTotalPages } from './countTotalPages.js';
 import { clearGallery } from './clearGallery.js';
 
 const refs = getRefs();
@@ -57,7 +57,7 @@ async function searchSubmit(e) {
     }
 
     // calculate total pages after receiving object
-    countTotalPage(response, intersectionData);
+    countTotalPages(response, intersectionData);
 
     // start observing page
     observer.observe(refs.targetScroll);

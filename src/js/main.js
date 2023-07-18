@@ -1,5 +1,5 @@
-import { getTrending } from './get-api.js';
 import getRefs from './refs.js';
+import { getTrending } from './get-api.js';
 import { renderingImgList } from './renderingImgList.js';
 import { onLoad, optionsScroll } from './intersection.js';
 import { globalVars } from './globalVars.js';

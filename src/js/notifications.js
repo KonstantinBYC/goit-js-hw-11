@@ -8,14 +8,14 @@ export function notifySuccessOrFail(response, refs) {
     refs.searchForm.reset();
 
     Notiflix.Notify.failure(
-      'Sorry, there are no images matching your search query. Please try again.'
+      'Sorry, we found zero images by your search query. Please try again.'
     );
   } else {
     // clear data from input
     refs.searchForm.reset();
 
     Notiflix.Notify.success(
-      `Hooray! We found ${response.data.totalHits} images.`,
+      `Well done! We found ${response.data.totalHits} images.`,
       {
         timeout: 3000,
       }

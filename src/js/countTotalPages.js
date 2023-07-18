@@ -1,5 +1,5 @@
 // Count total pages of received data
-export function countTotalPage(response, intersectionData) {
+export function countTotalPages(response, intersectionData) {
   let totalImg = response.data.totalHits;
   intersectionData.totalHits = totalImg;
 

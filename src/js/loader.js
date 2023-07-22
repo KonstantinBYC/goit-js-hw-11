@@ -1,9 +1,9 @@
-// Show loading message
-export function showLoadingMessage(refs) {
+// show loading message
+export function showLoadMessage(refs) {
   refs.loadingMessage.style.display = 'block';
 }
 
-// Hide loading message
-export function hideLoadingMessage(refs) {
+// hide loading message
+export function hideLoadMessage(refs) {
   refs.loadingMessage.style.display = 'none';
 }

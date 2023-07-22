@@ -1,20 +1,24 @@
 import getRefs from './refs.js';
-import { getTrending } from './get-api.js';
-import { renderingImgList } from './renderingImgList.js';
+import { getTrending } from './dataExitApi.js';
+import { renderGallery } from './renderGallery.js';
 import { onLoad, optionsScroll } from './intersection.js';
-import { globalVars } from './globalVars.js';
-import { showLoadingMessage, hideLoadingMessage } from './loader.js';
-import { notifySuccessOrFail } from './notifications.js';
+import { pagination } from './pagination.js';
+import { showLoadMessage, hideLoadMessage } from './loader.js';
+import { reportSuccessOrFail } from './reports.js';
 import { countTotalPages } from './countTotalPages.js';
-import { clearGallery } from './clearGallery.js';
 
 const refs = getRefs();
-const intersectionData = globalVars[0];
+const intersectionData = pagination[0];
 
 refs.searchForm.addEventListener('submit', searchSubmit);
 
 // Intersection observer of infinity scroll
 let observer = new IntersectionObserver(onLoad, optionsScroll);
+
+// clear gallery list
+function clearGalleryList() {
+  refs.gallery.innerHTML = '';
+}
 
 // Listening search(input) and rendering marup
 async function searchSubmit(e) {
@@ -22,46 +26,33 @@ async function searchSubmit(e) {
 
   //data form input form
   const inputData = e.target.elements.searchQuery.value;
-
   intersectionData.input = inputData;
 
   // default number of first page
   intersectionData.page = 1;
 
   try {
-    showLoadingMessage(refs);
+    showLoadMessage(refs);
 
-    // receiving object by our requested (inputData)
+    // receiving object by our requested data
     const response = await getTrending(intersectionData.page, inputData, refs);
 
-    // card that rendered with function renderingImgList()
-    const photoCard = document.querySelector('.photo-card');
-
-    // if markup exists in .gallery => remove all markup
-    if (photoCard) {
-      clearGallery(refs);
-    }
-
-    // notifying about unsuccessful search or success
-    notifySuccessOrFail(response, refs);
+    // reports about unsuccessful search or success
+    reportSuccessOrFail(response, refs);
 
     // call renderingImgList
-    renderingImgList(response, refs);
-
-    if (response) {
-      hideLoadingMessage(refs);
-    }
-
-    if (response.code === 'ERR_BAD_REQUEST') {
-      throw new Error(response.code);
-    }
+    renderGallery(response, refs);
 
     // calculate total pages after receiving object
     countTotalPages(response, intersectionData);
 
     // start observing page
-    observer.observe(refs.targetScroll);
+    observer.observe(refs.presentScroll);
+
+    // Hide loading message after rendering the gallery
+    hideLoadMessage(refs);
   } catch (error) {
     console.log(error);
+    hideLoadMessage(refs);
   }
 }

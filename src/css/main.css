@@ -3,7 +3,7 @@
 
 body {
   font-size: 13px;
-  font-family: 'Arvo', monospace;
+  font-family: 'Tahoma', monospace;
   width: 100%;
   height: 70vh;
   background-image: url(../img/background.png);
@@ -16,12 +16,11 @@ body {
 /* Header */
 
 header {
-  width: 100%;
   height: 180px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
   flex-direction: column;
+  margin-left: 30px;
   margin-bottom: 20px;
   padding: 0px;
 }
@@ -48,12 +47,12 @@ header .search-box {
   height: 39px;
   border: none;
   outline: none;
-  background: #14e3f1;
-  border-radius: 30px;
+  background: #b6d1f5;
+  border-radius: 7px;
   color: gray;
   font-size: 16px;
-  text-align: center;
-  padding-left: 10px;
+  text-align: left;
+  padding-left: 15px;
   padding-right: 45px;
 }
 
@@ -61,15 +60,18 @@ header .search-box {
   cursor: pointer;
   width: 39px;
   height: 39px;
-  border-radius: 30px;
+  border-radius: 7px;
   border: none;
   position: absolute;
   top: 0;
   right: 0;
   transform: scale(0.9);
   background: rgb(95, 110, 240);
+  transition: background 200ms ease-in;
 }
-
+.search-box:hover button {
+  background: rgb(31, 50, 223);
+}
 /* ---------- */
 /* Gallery */
 
@@ -81,9 +83,9 @@ header .search-box {
   gap: 18px;
 }
 .photo-card {
-  width: 320px;
-  height: 200px;
-  border-radius: 7px;
+  width: 250px;
+  height: 170px;
+  border-radius: 3px;
   overflow: hidden;
   border: 0px solid #fff;
   position: relative;
@@ -93,7 +95,7 @@ header .search-box {
 
 .photo-card:hover {
   box-shadow: 1px 0px 36px -9px rgba(139, 138, 138, 0.82);
-  bottom: 3px;
+  transform: scale(1.05);
 }
 
 a {
@@ -102,7 +104,6 @@ a {
 }
 
 .photo-card:hover .info {
-  /* right: 0; */
   opacity: 1;
   visibility: initial;
 }
@@ -111,30 +112,24 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 3px;
 }
 
 .info {
   width: 100%;
   height: 100%;
-  /* right: -100%; */
   top: 0;
   right: 0;
-
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
-
   position: absolute;
   background: #1d4f5f46;
-  backdrop-filter: blur(5px);
-  border-radius: 15px;
+  backdrop-filter: invert(30%);
+  border-radius: 3px;
   color: #fff;
-  padding: 30px;
-
-  /* transition: right 1150ms ease-in; */
-
-  transition: opacity 550ms ease-in-out;
+  padding: 15px 0px 10px 70px;
+  transition: opacity 350ms ease-in-out;
 }
 
 .info-item {
@@ -144,22 +139,17 @@ a {
 
 /* --------------------------- */
 /* Scrollbar */
-
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
-
 ::-webkit-scrollbar-track {
-  background: #d1e5ff;
+  background: #15478a;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(#028d8a, #f5e8a6);
-  border-radius: 4px;
+  background: linear-gradient(#188381, #dbca7e);
+  border-radius: 3px;
 }
-
 /* Loader */
-
 .loader {
   transform: rotateZ(45deg);
   perspective: 1000px;

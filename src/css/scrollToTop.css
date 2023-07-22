@@ -1,9 +1,7 @@
 .stt {
   position: fixed;
-  right: 15px;
-  bottom: 15px;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  right: 48%;
+  bottom: 10px;
   display: flex;
   width: 50px;
   height: 50px;
@@ -11,52 +9,20 @@
   cursor: pointer;
   visibility: hidden;
   opacity: 0;
-  -webkit-transition: 0.3s ease-in-out;
-  -o-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
 .stt:hover {
   opacity: 1;
 }
-.stt__active {
+.stt_active {
   visibility: visible;
   opacity: 0.5;
 }
-.stt__block_black {
-  background-color: #d3c6c6;
-  border-radius: 5%;
-}
-.stt__block_black:before {
-  position: absolute;
-  top: 50%;
-  left: 40%;
-  display: block;
-  width: 20px;
-  height: 5px;
-  content: '';
-  background-color: #fbff01;
-  -webkit-transform: translate(0, -50%) rotate(45deg);
-  -ms-transform: translate(0, -50%) rotate(45deg);
-  transform: translate(0, -50%) rotate(45deg);
-}
-.stt__block_black:after {
-  position: absolute;
-  top: 50%;
-  right: 40%;
-  display: block;
-  width: 20px;
-  height: 5px;
-  content: '';
-  background-color: #fff;
-  -webkit-transform: translate(0, -50%) rotate(-45deg);
-  -ms-transform: translate(0, -50%) rotate(-45deg);
-  transform: translate(0, -50%) rotate(-45deg);
-}
-.stt__circle__black {
+.stt_circle_black {
   background-color: #096909;
   border-radius: 50%;
 }
-.stt__circle__black:before {
+.stt_circle_black:before {
   position: absolute;
   top: 50%;
   left: 40%;
@@ -65,11 +31,9 @@
   height: 5px;
   content: '';
   background-color: #fff;
-  -webkit-transform: translate(0, -50%) rotate(45deg);
-  -ms-transform: translate(0, -50%) rotate(45deg);
   transform: translate(0, -50%) rotate(45deg);
 }
-.stt__circle__black:after {
+.stt_circle_black:after {
   position: absolute;
   top: 50%;
   right: 40%;
@@ -78,26 +42,5 @@
   height: 5px;
   content: '';
   background-color: #fff;
-  -webkit-transform: translate(0, -50%) rotate(-45deg);
-  -ms-transform: translate(0, -50%) rotate(-45deg);
   transform: translate(0, -50%) rotate(-45deg);
-}
-.stt__emoji {
-  border-radius: 50%;
-  opacity: 1;
-}
-.stt__emoji:before {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  font-size: 36px;
-  content: '\1F446';
 }

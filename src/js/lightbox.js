@@ -1,13 +1,15 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-export const slider = [
+export const viewer = [
   {
     modalImg: new SimpleLightbox('.gallery a', {
-      doubleTapZoom: '1.5',
-      captionsData: 'data-parent',
       captionDelay: 250,
-      widthRatio: 1.5,
+      fadeSpeed: 350,
+      widthRatio: `1.5`,
+      doubleTapZoom: '1.2',
+      maxZoom: `12`,
+      captionsData: 'data-parent',
     }),
   },
 ];

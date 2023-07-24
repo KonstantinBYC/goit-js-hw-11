@@ -2,11 +2,11 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import { viewer } from './lightbox.js';
 
 // Create markup - rendering img-list
-export function renderGallery(arr, refs) {
-  const gallery = document.createDocumentFragment();
-  const dataObj = arr.data.hits;
+export function renderGallery(array, refs) {
+  const gallery = document.querySelector('.gallery');
+  const dataObj = array.totalHits;
 
-  for (const data of dataObj) {
+  for (const key in dataObj) {
     const {
       webformatURL,
       largeImageURL,
@@ -15,7 +15,7 @@ export function renderGallery(arr, refs) {
       comments,
       downloads,
       tags,
-    } = data;
+    } = dataObj[key];
 
     const card = `
       <div class="photo-card">
@@ -30,60 +30,11 @@ export function renderGallery(arr, refs) {
         </a>
       </div>
     `;
-    galleryFragment.appendChild(
-      document.createRange().createContextualFragment(card)
-    );
   }
 
-  refs.gallery.appendChild(galleryFragment);
+  refs.gallery.insertAdjacentHTML('beforeend', card);
 
-  // Simple Lightbox Slider
+  // simple-lightbox slider
   const imgSlider = viewer[0].modalImg;
   imgSlider.refresh();
 }
-
-//   for (const key in dataObj) {
-//     const {
-//       webformatURL,
-//       largeImageURL,
-//       likes,
-//       views,
-//       comments,
-//       downloads,
-//       tags,
-//     } = dataObj[key];
-
-//     const data = {
-//       url: webformatURL,
-//       bigUrl: largeImageURL,
-//       alt: tags,
-//       totalLikes: likes,
-//       totalViews: views,
-//       totalComments: comments,
-//       totalDownloads: downloads,
-//     };
-
-//     const card = `<div class="photo-card">
-//          <a class="card-item" href="${data.bigUrl}"><img class="card-img" src="${data.url}" alt="${data.alt}" data-parent="<b>Views: </b>${data.totalViews}   <b>Downloads: </b>${data.totalDownloads} <b>Likes: </b>${data.totalLikes} <b>Comments: </b>${data.totalComments} "  width="300" height="200"/>
-//        <div class="info">
-//      	         <p class="info-item">
-//      		<b>Views: </b>${data.totalViews}
-//      	  </p>	  <p class="info-item">
-//      		<i class="fa-solid fa-download"></i> ${data.totalDownloads}
-//      	  </p>
-//            <p class="info-item">
-//      		<i class="fa-regular fa-heart"></i> ${data.totalLikes}
-//      	  </p>
-//      	  <p class="info-item">
-//      		<i class="fa-solid fa-comment"></i> ${data.totalComments}
-//      	  </p>
-//        </div>
-//        </a>
-//      </div>
-//      `;
-//     refs.gallery.insertAdjacentHTML('beforeend', card);
-//     // Simple Lightbox Slider
-//     const imgSlider = viewer[0].modalImg;
-//     imgSlider.refresh();
-//   }
-// }

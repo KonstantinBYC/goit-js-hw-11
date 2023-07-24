@@ -38,29 +38,3 @@ export async function onLoad(entries, observer, intersectionData, refs) {
     }
   }
 }
-
-// export async function onLoad(entries, observer) {
-//   entries.forEach(async entry => {
-//     if (
-//       entry.isIntersecting &&
-//       intersectionData.page <= intersectionData.totalPages
-//     ) {
-//       intersectionData.page += 1;
-//       try {
-//         const response = await getTrending(
-//           intersectionData.page,
-//           intersectionData.input,
-//           refs
-//         );
-//         renderGallery(response, refs);
-//         if (intersectionData.page === intersectionData.totalPages) {
-//           reachedLastPage();
-//           observer.unobserve(refs.presentScroll);
-//         }
-//       } catch (error) {
-//         console.log(error);
-//         hideLoadMessage(refs);
-//       }
-//     }
-//   });
-// }

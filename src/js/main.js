@@ -19,7 +19,6 @@ let observer = new IntersectionObserver(onLoad, optionsScroll);
 function clearGalleryList() {
   refs.gallery.innerHTML = '';
 }
-
 // Listening search(input) and rendering marup
 async function searchSubmit(e) {
   e.preventDefault();

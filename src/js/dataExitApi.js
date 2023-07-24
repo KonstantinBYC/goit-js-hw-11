@@ -33,23 +33,3 @@ export async function getTrending(page = 1, inputData, refs) {
     hideLoadMessage(refs);
   }
 }
-
-// export async function getTrending(page = 1, inputData, refs) {
-//   const options = new URLSearchParams({
-//     key: `${API_KEY}`,
-//     q: `${inputData}`,
-//     image_type: `photo`,
-//     orientation: `horizontal`,
-//     safesearch: true,
-//     page: `${page}`,
-//     per_page: `${totalPerPage}`,
-//   });
-
-//   try {
-//     const getData = await axios.get(`${URL}?${options}`);
-//     return getData;
-//   } catch (error) {
-//     reportError(error, refs);
-//     hideLoadMessage(refs);
-//   }
-// }

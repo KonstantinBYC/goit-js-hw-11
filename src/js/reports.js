@@ -14,18 +14,17 @@ function resetSearchForm(refs) {
 
 export function reportSuccessOrFail(response, refs) {
   resetSearchForm(refs);
-  if (response.data.totalHits === 0) {
+  if (response.totalHits === 0) {
     Notiflix.Report.failure(NO_IMAGES_MESSAGE);
   } else {
     Notiflix.Report.success(
-      `${SUCCESS_MESSAGE} ${response.data.totalHits} images.`,
+      `${SUCCESS_MESSAGE} ${response.totalHits} images.`,
       {
         timeout: SUCCESS_TIMEOUT,
       }
     );
   }
 }
-
 export function reportError(error, refs) {
   resetSearchForm(refs);
   Notiflix.Report.failure(error.message, {

@@ -4,6 +4,7 @@ function getRefs() {
     searchForm: document.querySelector('.search-form'),
     presentScroll: document.querySelector('.pres-scroll'),
     loadingMessage: document.querySelector('.loader'),
+    
   };
 }
 

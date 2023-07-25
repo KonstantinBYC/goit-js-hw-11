@@ -1,6 +1,13 @@
 import getRefs from './refs.js';
-import { getTrending } from './dataExitApi.js';
+import {
+  getTrending,
+  setSearchQuery,
+  nextPage,
+  resetPage,
+} from './dataExitApi.js';
 import { renderGallery } from './renderGallery.js';
+import { updateFirstSearch } from './renderGallery.js';
+
 import { onLoad, optionsScroll } from './intersection.js';
 import { pagination } from './pagination.js';
 import { showLoadMessage, hideLoadMessage } from './loader.js';
@@ -55,3 +62,39 @@ async function searchSubmit(e) {
     hideLoadMessage(refs);
   }
 }
+setSearchQuery(searchQuery);
+resetPage();
+updateFirstSearch(true);
+loadMoreBtn.hidden = true;
+gallery.innerHTML = '';
+
+renderGallery().then(function (data) {
+  if (data.length === 0) {
+    Notify.failure('Nothing found by Your request');
+    loadMoreBtn.style.display = 'none';
+    return;
+  }
+
+  loadMoreBtn.hidden = false;
+  loadMoreBtn.style.display = 'block';
+});
+
+loadMoreBtn.addEventListener('click', function () {
+  nextPage().then(function (data) {
+    if (data.length === 0) {
+      Report.info(
+        "We're sorry",
+        "but you've reached the end of search results.",
+        'Okay'
+      );
+      loadMoreBtn.hidden = true;
+      return;
+    }
+
+    gallery.insertAdjacentHTML('beforeend', createMarkup(data));
+    new SimpleLightbox('.gallery a', {
+      captionDelay: 200,
+      captionsData: 'alt',
+    });
+  });
+});

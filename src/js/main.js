@@ -16,6 +16,8 @@ import { countTotalPages } from './countTotalPages.js';
 
 const refs = getRefs();
 const intersectionData = pagination[0];
+let btnLdMore = document.querySelector('.load-more');
+btnLdMore.style.display = 'none';
 
 refs.searchForm.addEventListener('submit', searchSubmit);
 
@@ -49,6 +51,9 @@ async function searchSubmit(e) {
     // call renderingImgList
     renderGallery(response, refs);
 
+    // load more button render
+    refs.btnLdMore.hidden = false;
+
     // calculate total pages after receiving object
     countTotalPages(response, intersectionData);
 
@@ -62,23 +67,36 @@ async function searchSubmit(e) {
     hideLoadMessage(refs);
   }
 }
-setSearchQuery(searchQuery);
-resetPage();
-updateFirstSearch(true);
-loadMoreBtn.hidden = true;
-gallery.innerHTML = '';
 
 renderGallery().then(function (data) {
   if (data.length === 0) {
     Notify.failure('Nothing found by Your request');
-    loadMoreBtn.style.display = 'none';
+    btnLdMore.style.display = 'none';
     return;
   }
-
-  loadMoreBtn.hidden = false;
-  loadMoreBtn.style.display = 'block';
 });
 
+refs.btnLdMore.addEventListener('click', function () {
+  nextPage().then(function (data) {
+    if (data.length === 0) {
+      Report.info(
+        "We're sorry",
+        "but you've reached the end of search results.",
+        'Okay'
+      );
+      return;
+    }
+
+    gallery.insertAdjacentHTML('beforeend', createMarkup(data));
+    refs.btnLdMore.hidden = false;
+    new SimpleLightbox('.gallery a', {
+      captionDelay: 200,
+      captionsData: 'alt',
+    });
+    refs.btnLdMore.hidden = false;
+    refs.btnLdMore.style.display = 'block';
+  });
+});
 loadMoreBtn.addEventListener('click', function () {
   nextPage().then(function (data) {
     if (data.length === 0) {
@@ -98,3 +116,9 @@ loadMoreBtn.addEventListener('click', function () {
     });
   });
 });
+
+setSearchQuery(searchQuery);
+btnLdMore.hidden = true;
+resetPage();
+updateFirstSearch(true);
+gallery.innerHTML = '';

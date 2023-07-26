@@ -1,5 +1,5 @@
 export function countTotalPages(response, intersectionData) {
-  const { total } = response.data;
+  const { totalHits } = response.data;
   const { totalPerPage } = intersectionData;
   // Validate input data
   if (!totalHits || !totalPerPage || totalHits <= 0 || totalPerPage <= 0) {

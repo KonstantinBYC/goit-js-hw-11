@@ -8,8 +8,9 @@ import { hideLoadMessage } from './loader.js';
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '38329464-2d1c971fb60ebb53783c84d62';
 let searchQuery = '';
-// //   amount imgs per one page
-const totalPerPage = pagination[0];
+let currentPage = 1;
+let total = null;
+let firstSearch = true;
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -19,7 +20,7 @@ const api = axios.create({
     image_type: `photo`,
     orientation: `horizontal`,
     safesearch: true,
-    // page: `${page}`,
+    page: `1`,
     per_page: 40,
   },
 });
@@ -31,7 +32,6 @@ export async function getTrending(page = 1, inputData, refs) {
     return response.data;
   } catch (error) {
     throw reportError;
-    hideLoadMessage(refs);
   }
 }
 

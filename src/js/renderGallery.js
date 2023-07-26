@@ -57,6 +57,3 @@ export function renderGallery(array, refs) {
 export function updateFirstSearch(state) {
   firstSearch = state;
 }
-
-let loadMoreBtn = document.querySelector('.load-more');
-loadMoreBtn.style.display = 'none';

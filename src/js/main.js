@@ -70,7 +70,7 @@ async function searchSubmit(e) {
 
 renderGallery().then(function (data) {
   if (data.length === 0) {
-    Notify.failure('Nothing found by Your request');
+    Notify.failure('Nothing found by your request');
     btnLdMore.style.display = 'none';
     return;
   }

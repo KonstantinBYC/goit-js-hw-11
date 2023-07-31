@@ -39,6 +39,7 @@ export async function getTrending(page = 1, inputData, refs) {
 export function setSearchQuery(newQuery) {
   searchQuery = newQuery;
 }
+
 // Функція для переходу до наступної сторінки
 export function nextPage() {
   currentPage = currentPage + 1;

@@ -5,7 +5,6 @@ import { viewer } from './lightbox.js';
 // Create markup - rendering img-list
 
 export function renderGallery(resp, refs) {
-  refs.gallery.innerHTML = '';
   const dataObj = resp.data.hits;
 
   for (const key in dataObj) {

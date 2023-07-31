@@ -69,14 +69,6 @@ async function searchSubmit(e) {
   }
 }
 
-renderGallery().then(function (hit) {
-  if (hit.length === 0) {
-    Notify.failure('Nothing found by your request');
-    btnLdMore.style.display = 'none';
-    return;
-  }
-});
-
 refs.btnLdMore.addEventListener('click', function () {
   nextPage().then(function (hit) {
     if (inputData.length === 0) {

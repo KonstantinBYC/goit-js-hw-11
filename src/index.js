@@ -1,28 +1,30 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+
+import { createMarkup } from './js/renderGallery';
 import {
   getImages,
   setSearchQuery,
   resetPage,
   nextPage,
   updateFirstSearch,
+  getTotal,
 } from './js/api-get';
-import { createMarkup } from './js/renderGallery';
 import { Notify } from 'notiflix';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
 let form = document.querySelector('#search-form');
 let gallery = document.querySelector('.gallery');
-let loadMoreBtn = document.querySelector('.load-more');
+let btnloadMore = document.querySelector('.load-more');
 
-loadMoreBtn.style.display = 'none';
+btnloadMore.style.display = 'none';
 
 form.addEventListener('submit', function (evt) {
   evt.preventDefault();
 
   let searchQuery = evt.target.searchQuery.value.trim();
   if (searchQuery === '') {
-    Notify.warning('Input field is empty or contains only spaces');
+    Notify.warning('Input field is empty. Please type something.');
     return;
   }
 
@@ -30,29 +32,33 @@ form.addEventListener('submit', function (evt) {
   resetPage();
   updateFirstSearch(true);
 
-  loadMoreBtn.hidden = true;
+  btnloadMore.hidden = true;
   gallery.innerHTML = '';
 
   getImages().then(function (data) {
     if (data.length === 0) {
       Notify.failure('Nothing found by Your request');
-      loadMoreBtn.style.display = 'none';
+      btnloadMore.style.display = 'none';
       return;
     }
-    Notify.success(`Well done! We found ${data.totalHits} images.`);
+    const searchResult = getTotal();
+    if (data.length > 0) {
+      Notify.success(`Well done! We found ${searchResult} images.`);
+    }
+
     gallery.insertAdjacentHTML('beforeend', createMarkup(data));
     new SimpleLightbox('.gallery a', {
       captionDelay: 200,
       captionsData: 'alt',
     });
-    loadMoreBtn.hidden = false;
-    loadMoreBtn.style.display = 'block';
+    btnloadMore.hidden = false;
+    btnloadMore.style.display = 'block';
   });
 
   evt.target.searchQuery.value = '';
 });
 
-loadMoreBtn.addEventListener('click', function () {
+btnloadMore.addEventListener('click', function () {
   nextPage().then(function (data) {
     if (data.length === 0) {
       Report.info(
@@ -60,7 +66,7 @@ loadMoreBtn.addEventListener('click', function () {
         "but you've reached the end of search results.",
         'Okay'
       );
-      loadMoreBtn.hidden = true;
+      btnloadMore.hidden = true;
       return;
     }
 

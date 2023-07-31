@@ -26,7 +26,8 @@ const api = axios.create({
 export async function getTrending(page = 1, inputData, refs) {
   try {
     const options = { params: { ...api.defaults.params, q: inputData, page } };
-    const response = await api.get('', options);
+    const response = await api.get('/', options);
+    console.log(response.data);
     return response;
   } catch (error) {
     notifyError(error, refs);

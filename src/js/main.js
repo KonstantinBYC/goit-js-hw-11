@@ -68,9 +68,8 @@ async function searchSubmit(e) {
     hideLoadMessage(refs);
   }
 }
-
 refs.btnLdMore.addEventListener('click', function () {
-  nextPage().then(function (hit) {
+  nextPage().then(function (data) {
     if (inputData.length === 0) {
       Report.info(
         "We're sorry",

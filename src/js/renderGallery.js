@@ -3,7 +3,6 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import { viewer } from './lightbox.js';
 
 // Create markup - rendering img-list
-
 export function renderGallery(resp, refs) {
   const dataObj = resp.data.hits;
 

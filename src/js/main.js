@@ -53,6 +53,7 @@ async function searchSubmit(e) {
 
     // load more button render
     refs.btnLdMore.hidden = false;
+    clearGalleryList(refs);
 
     // calculate total pages after receiving object
     countTotalPages(response, intersectionData);
@@ -68,8 +69,8 @@ async function searchSubmit(e) {
   }
 }
 
-renderGallery().then(function (data) {
-  if (data.length === 0) {
+renderGallery().then(function (hit) {
+  if (hit.length === 0) {
     Notify.failure('Nothing found by your request');
     btnLdMore.style.display = 'none';
     return;
@@ -77,8 +78,8 @@ renderGallery().then(function (data) {
 });
 
 refs.btnLdMore.addEventListener('click', function () {
-  nextPage().then(function (data) {
-    if (data.length === 0) {
+  nextPage().then(function (hit) {
+    if (inputData.length === 0) {
       Report.info(
         "We're sorry",
         "but you've reached the end of search results.",

@@ -27,6 +27,10 @@ const sttClick = () => {
       if (docHeight > 0) {
         window.scrollTo({ top: docHeight, behavior: 'smooth' });
         requestAnimationFrame(sttAnim);
+        window.scrollBy({
+          top: cardHeight * 2,
+          behavior: 'smooth',
+        });
       } else {
         sttElem.style.pointerEvents = 'auto';
       }

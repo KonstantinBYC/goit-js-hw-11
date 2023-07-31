@@ -1,12 +1,13 @@
 export function countTotalPages(response, intersectionData) {
-  const { totalHits } = response.data.totalHits;
-  const { totalPerPage } = intersectionData;
+  let totalImg = response.data.totalHits;
+  intersectionData.totalHits = totalImg;
 
   // validate input data
   if (!totalHits || !totalPerPage || totalHits <= 0 || totalPerPage <= 0) {
     throw new Error('Invalid input data.');
   }
 
-  intersectionData.totalHits = totalHits;
-  intersectionData.totalPages = Math.ceil(totalHits / totalPerPage);
+  intersectionData.totalPages = Math.round(
+    intersectionData.totalHits / intersectionData.totalPerPage
+  );
 }

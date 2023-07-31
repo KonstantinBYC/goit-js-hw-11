@@ -1,56 +1,34 @@
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
-import { viewer } from './lightbox.js';
-
-// Create markup - rendering img-list
-export function renderGallery(resp, refs) {
-  const dataObj = resp.data.hits;
-
-  for (const key in dataObj) {
-    const {
-      webformatURL,
-      likes,
-      views,
-      comments,
-      downloads,
-      tags,
-      largeImageURL,
-    } = dataObj[key];
-
-    const data = {
-      url: webformatURL,
-      tag: tags,
-      totalLikes: likes,
-      totalViews: views,
-      totalComments: comments,
-      totalDownloads: downloads,
-      urlBig: largeImageURL,
-    };
-
-    const card = `<div class="photo-card">
-         <a class="card-item" href="${data.urlBig}"><img class="card-img" src="${data.url}" alt="${data.tag}" data-parent="<b>Likes: </b>${data.totalLikes} <b>Comments: </b>${data.totalComments} <b>Downloads: </b>${data.totalDownloads} <b>Views: </b>${data.totalViews}" width="300" height="200"/>
-       <div class="info">
-     	  <p class="info-item">
-     		<i class="fa-regular fa-heart"></i> ${data.totalLikes}
-     	  </p>
-     	  <p class="info-item">
-     		<i class="fa-solid fa-comment"></i> ${data.totalComments}
-     	  </p>
-     	  <p class="info-item">
-     		<i class="fa-solid fa-download"></i> ${data.totalDownloads}
-     	  </p>
+export function createMarkup(data) {
+  return data
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        views,
+        comments,
+        downloads,
+        likes,
+      }) =>
+        `<div class="photo-card">
+  <a href="${largeImageURL}">
+    <img class="image" src="${webformatURL}" alt="${tags}" loading="lazy"/>
+    <div class="info">
+          <p class="info-item">
+        <b>Downloads: ${downloads}</b>
+      </p>
+      <p class="info-item">
+        <b>Views: ${views}</b>
+      </p>
         <p class="info-item">
-     		<b>Views: </b>${data.totalViews}
-     	  </p>
-       </div>
-       </a>
-     </div>
-     `;
-
-    refs.gallery.insertAdjacentHTML('beforeend', card);
-
-    // Simple Lightbox Slider
-    const imgSlider = viewer[0].modalImg;
-    imgSlider.refresh();
-  }
+        <b>Likes: ${likes}</b>
+      </p>
+      <p class="info-item">
+        <b>Comments: ${comments}</b>
+      </p>
+    </div>
+  </a>
+</div>`
+    )
+    .join('');
 }
